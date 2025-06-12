@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @layer base {
-  .gradient-primary { @apply bg-gradient-primary; }
-  .gradient-secondary { @apply bg-gradient-secondary; }
-  .gradient-accent { @apply bg-gradient-accent; }
+  .gradient-primary { background-image: linear-gradient(135deg,#00B3D7 0%,#00A29A 100%); }
+  .gradient-secondary { background-image: linear-gradient(135deg,#6366F1 0%,#8B5CF6 100%); }
+  .gradient-accent { background-image: linear-gradient(135deg,#EC4899 0%,#F43F5E 100%); }
 
   /* Animación de aparecer (reveal) */
   .reveal { opacity:0; transform:translateY(30px);
@@ -14,9 +14,8 @@
 @layer components {
   .btn { @apply inline-block px-6 py-3 rounded-lg text-center font-semibold
         transition duration-300 ease-in-out shadow-md hover:shadow-lg; }
-  .btn-primary { @apply gradient-primary text-white hover:opacity-90; }
-  .btn-secondary { @apply gradient-secondary text-white hover:opacity-90; }
-  .btn-outline-primary { @apply border-2 border-primary text-primary hover:bg-primary/10; }
+  .btn-primary { @apply text-white hover:opacity-90; }
+  .btn-secondary { @apply text-white hover:opacity-90; }
 
   .section-padding { @apply py-16 md:py-24 px-4 sm:px-6 lg:px-8; }
   .card { @apply bg-white rounded-xl shadow-md overflow-hidden transition
