@@ -1,14 +1,37 @@
 name: Deploy to GitHub Pages
 
 on:
+  # se ejecuta cada vez que hagas push a main
   push:
     branches: [main]
+  # te permite lanzarlo manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read          # para clonar el repo
+  pages: write            # para publicar en Pages
+  id-token: write         # OIDC para la subida
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: withastro/action@v2
-        with:
-          deploy-to: 'github-pages'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Astro
+        uses: withastro/action@v4          # acción oficial
+        # Opcionales:
+        # with:
+        #   path: .                       # carpeta del proyecto
+        #   node-version: 22              # versión Node
+        #   package-manager: npm@latest   # npm, pnpm, yarn…
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
